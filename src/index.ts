@@ -4,7 +4,7 @@ import type { KeyUsage, Nowcast, Palettes, RateLimit, Status, TileFrame, TilesIn
 export * from "./errors.js";
 export type * from "./types.js";
 
-export const VERSION = "0.1.0";
+export const VERSION = "0.1.1";
 export const DEFAULT_BASE_URL = "https://nimboweather.com";
 
 const RETRY_STATUSES = new Set([429, 500, 502, 503, 504]);
@@ -160,7 +160,7 @@ export class Nimbo {
 
   private requireKey(): string {
     if (!this.apiKey)
-      throw new NimboError("No API key: pass { apiKey } or set NIMBO_API_KEY.", { code: "api_key_required" });
+      throw new NimboError("No API key: pass { apiKey } or set NIMBO_API_KEY (or NIMBO_KEY).", { code: "api_key_required" });
     return this.apiKey;
   }
 

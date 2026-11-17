@@ -25,12 +25,12 @@ Get a free key (no card) at [nimboweather.com](https://nimboweather.com), then:
 ```js
 import { Nimbo } from "nimbo-weather";
 
-const nimbo = new Nimbo({ apiKey: process.env.NIMBO_API_KEY }); // NIMBO_API_KEY is also read by default
+const nimbo = new Nimbo({ apiKey: process.env.NIMBO_KEY }); // NIMBO_API_KEY or NIMBO_KEY is also read by default
 const forecast = await nimbo.nowcast(52.37, 4.9); // Amsterdam
 
 console.log(forecast.summary?.text ?? "No radar coverage at this point");
 for (const m of forecast.minutely.slice(0, 6)) console.log(m.time, m.precip_mm_h, m.precip_probability);
-console.log(forecast.attribution); // show this with the data
+console.log(forecast.attribution); // show this with the data (Free plan)
 ```
 
 ## Methods
@@ -53,8 +53,8 @@ Options: `new Nimbo({ apiKey, baseUrl, timeoutMs = 10000, maxRetries = 2, maxRet
 
 - `coverage === "no_radar"`: the point is in the forecast area but no radar sees it. `summary` and every value are `null`.
 - `stale`: the forecast is late (more than 25 min old). `notice` explains an outage.
-- `attribution`: show it with the data, as the data licence requires. On the Free plan also show
-  "Rain forecast: Nimbo Weather" with a link to nimboweather.com.
+- `attribution`: on the Free plan, show it with the data ("Rain forecast: Nimbo Weather" and its link). Optional on
+  paid plans. `data_credits` links to the credits of the data the forecast is made from.
 
 ## Errors
 
@@ -82,6 +82,7 @@ Tiles take the key in the query string only, so a tile URL contains your key: bu
 ```js
 import { frameTileUrl } from "nimbo-weather";
 
+const apiKey = process.env.NIMBO_KEY;
 const index = await nimbo.tilesIndex();
 for (const frame of index.forecast) console.log(frame.offset_min, frameTileUrl(frame, 6, 33, 21, { apiKey }));
 ```

@@ -68,6 +68,8 @@ export interface Nowcast {
   grid: string;
   /** Credit lines to show with the data. */
   attribution: string[];
+  /** Link to the credits of the data the forecast is made from. */
+  data_credits?: string | null;
   /** From the X-RateLimit-* headers (added by this client). */
   rateLimit: RateLimit | null;
   [extra: string]: unknown;
@@ -120,6 +122,8 @@ export interface TilesIndex {
   latest: string;
   grid: string;
   attribution: string[];
+  /** Link to the credits of the data the forecast is made from. */
+  data_credits?: string | null;
   rateLimit: RateLimit | null;
   [extra: string]: unknown;
 }

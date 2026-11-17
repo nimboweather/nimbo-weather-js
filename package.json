@@ -1,6 +1,6 @@
 {
   "name": "nimbo-weather",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Client for the Nimbo Weather rain nowcast API: minute-by-minute rain for the next 3 hours in Europe.",
   "type": "module",
   "main": "./dist/index.js",
